@@ -108,6 +108,9 @@ app.get('/api/settings', (req, res) => {
     ...settings,
     smtp: {
       enabled: settings.smtp?.enabled || false,
+      provider: settings.smtp?.provider || (process.env.RESEND_API_KEY ? 'resend' : 'smtp'),
+      resendApiKey: settings.smtp?.resendApiKey ? '••••••••' : (process.env.RESEND_API_KEY ? '•••••••• (Railway Env)' : ''),
+      hasResendApiKey: !!(settings.smtp?.resendApiKey || process.env.RESEND_API_KEY),
       host: settings.smtp?.host || '',
       port: settings.smtp?.port || 587,
       user: settings.smtp?.user || '',
@@ -130,6 +133,10 @@ app.post('/api/settings', (req, res) => {
   let updatedSmtp = { ...(current.smtp || {}), ...(req.body.smtp || {}) };
   if (req.body.smtp && req.body.smtp.pass === undefined && current.smtp?.pass) {
     updatedSmtp.pass = current.smtp.pass;
+  }
+  // If resendApiKey is omitted or masked, preserve existing
+  if (req.body.smtp && (!req.body.smtp.resendApiKey || req.body.smtp.resendApiKey.includes('•••')) && current.smtp?.resendApiKey) {
+    updatedSmtp.resendApiKey = current.smtp.resendApiKey;
   }
 
   const updated = {

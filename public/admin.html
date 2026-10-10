@@ -557,53 +557,98 @@
           <div class="form-group">
             <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #ffffff; cursor: pointer; padding: 12px 14px; background: rgba(0, 0, 0, 0.3); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1);">
               <input type="checkbox" id="smtp-enabled" style="accent-color: #00f2fe; width: 18px; height: 18px;">
-              <span><strong>Aktifkan Real SMTP Live Dispatch</strong> (Jika tidak dicentang, sistem berjalan dalam mode simulasi preview)</span>
+              <span><strong>Aktifkan Pengiriman Email Nyata (Live Dispatch)</strong> (Jika tidak dicentang, sistem berjalan dalam mode simulasi preview)</span>
             </label>
           </div>
 
-          <!-- Quick Presets Buttons -->
-          <div style="margin: 16px 0;">
-            <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">PILIH TEMPLATE PRESET SMTP:</div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('gmail')">Gmail / GSuite (Port 465)</button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('office365')">Office 365 (Port 587)</button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('yahoo')">Yahoo Mail (Port 465)</button>
-              <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('custom')">Hosting cPanel (Port 465)</button>
+          <!-- Provider Choice -->
+          <div class="form-group" style="margin-top: 18px;">
+            <label class="form-label" style="font-weight: 700; color: #00f2fe; margin-bottom: 8px;">PILIH METODE PENGIRIMAN EMAIL:</label>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <label id="label-provider-resend" style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: rgba(0, 242, 254, 0.12); border: 2px solid #00f2fe; padding: 14px 18px; border-radius: 10px; flex: 1; min-width: 260px;">
+                <input type="radio" name="email-provider" value="resend" id="provider-resend" checked style="accent-color: #00f2fe; width: 18px; height: 18px; margin-top: 2px;">
+                <div>
+                  <div style="font-weight: 700; color: #fff; font-size: 14px;">⚡ Resend API (HTTPS Port 443)</div>
+                  <div style="font-size: 12px; color: #38bdf8; margin-top: 2px;">Rekomendasi Railway & Cloud — Anti Blokir Port, Cepat & Pasti Terkirim!</div>
+                </div>
+              </label>
+
+              <label id="label-provider-smtp" style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.15); padding: 14px 18px; border-radius: 10px; flex: 1; min-width: 260px;">
+                <input type="radio" name="email-provider" value="smtp" id="provider-smtp" style="accent-color: #00f2fe; width: 18px; height: 18px; margin-top: 2px;">
+                <div>
+                  <div style="font-weight: 700; color: #fff; font-size: 14px;">✉️ SMTP Biasa (Gmail / Host)</div>
+                  <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Port 465/587 (Catatan: Diblokir firewall di Railway Free/Hobby)</div>
+                </div>
+              </label>
             </div>
           </div>
 
-          <div class="form-row-2" style="margin-top: 14px;">
-            <div class="form-group">
-              <label class="form-label" for="smtp-host">SMTP Host Server <span class="req">*</span></label>
-              <input type="text" id="smtp-host" class="form-input" placeholder="smtp.gmail.com" required>
+          <!-- RESEND SETTINGS BOX -->
+          <div id="resend-settings-box" style="background: rgba(0, 242, 254, 0.06); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 10px; padding: 18px; margin-top: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <span style="font-weight: 700; color: #00f2fe; font-size: 13.5px;">🔑 Konfigurasi Resend API Key</span>
+              <a href="https://resend.com/api-keys" target="_blank" style="color: #38bdf8; font-size: 12px; text-decoration: underline;">Buat API Key Gratis di Resend.com ↗</a>
             </div>
-
             <div class="form-group">
-              <label class="form-label" for="smtp-port">SMTP Port <span class="req">*</span></label>
-              <input type="number" id="smtp-port" class="form-input" placeholder="465 atau 587" required>
-            </div>
-          </div>
-
-          <div class="form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="smtp-user">SMTP Username / Email Pengirim <span class="req">*</span></label>
-              <input type="email" id="smtp-user" class="form-input" placeholder="events@domain.com" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="smtp-pass">SMTP Password / App Password <span class="req">*</span></label>
-              <input type="password" id="smtp-pass" class="form-input" placeholder="" autocomplete="off" required>
+              <label class="form-label" for="resend-api-key">Resend API Key <span class="req">*</span></label>
+              <input type="password" id="resend-api-key" class="form-input" placeholder="re_123456789..." autocomplete="off">
+              <small style="color: #94a3b8; font-size: 11.5px; display: block; margin-top: 4px;">
+                💡 <em>Tips:</em> Anda juga bisa memasukkannya di tab <strong>Variables</strong> Railway dengan nama <code>RESEND_API_KEY</code>.
+              </small>
             </div>
           </div>
 
-          <div class="form-group">
+          <!-- SMTP TRADITIONAL BOX -->
+          <div id="smtp-traditional-box" style="display: none; margin-top: 18px;">
+            <!-- Quick Presets Buttons -->
+            <div style="margin: 16px 0;">
+              <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">PILIH TEMPLATE PRESET SMTP:</div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('gmail')">Gmail / GSuite (Port 465)</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('office365')">Office 365 (Port 587)</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('yahoo')">Yahoo Mail (Port 465)</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="AdminPortal.applySmtpPreset('custom')">Hosting cPanel (Port 465)</button>
+              </div>
+            </div>
+
+            <div class="form-row-2" style="margin-top: 14px;">
+              <div class="form-group">
+                <label class="form-label" for="smtp-host">SMTP Host Server <span class="req">*</span></label>
+                <input type="text" id="smtp-host" class="form-input" placeholder="smtp.gmail.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="smtp-port">SMTP Port <span class="req">*</span></label>
+                <input type="number" id="smtp-port" class="form-input" placeholder="465 atau 587">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="smtp-user">SMTP Username / Email Pengirim <span class="req">*</span></label>
+                <input type="email" id="smtp-user" class="form-input" placeholder="events@domain.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="smtp-pass">SMTP Password / App Password <span class="req">*</span></label>
+                <input type="password" id="smtp-pass" class="form-input" placeholder="" autocomplete="off">
+              </div>
+            </div>
+          </div>
+
+          <!-- SENDER FROM (SHARED) -->
+          <div class="form-group" style="margin-top: 18px;">
             <label class="form-label" for="smtp-from">Nama & Alamat Pengirim (From Display)</label>
-            <input type="text" id="smtp-from" class="form-input" placeholder="Beyond Ordinary 2026 &lt;events@domain.com&gt;">
+            <input type="text" id="smtp-from" class="form-input" placeholder="Beyond Ordinary 2026 &lt;onboarding@resend.dev&gt;">
+            <small style="color: #94a3b8; font-size: 11.5px; display: block; margin-top: 4px;">
+              Jika memakai Resend (belum verifikasi domain), isi: <code>Beyond Ordinary 2026 &lt;onboarding@resend.dev&gt;</code>.<br>
+              Jika sudah verifikasi domain di Resend atau memakai Gmail SMTP, gunakan alamat email resmi Anda.
+            </small>
           </div>
 
           <div style="margin-top: 24px;">
             <button type="submit" class="btn btn-primary btn-lg">
-              💾 Simpan Konfigurasi SMTP
+              💾 Simpan Konfigurasi Email
             </button>
           </div>
         </form>

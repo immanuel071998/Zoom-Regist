@@ -439,12 +439,40 @@ const AdminPortal = {
 
     this.updateQrPreview();
 
-    // SMTP Form
+    // SMTP / Resend Email Form
     if (document.getElementById('smtp-enabled')) document.getElementById('smtp-enabled').checked = !!smtp.enabled;
     if (document.getElementById('smtp-host')) document.getElementById('smtp-host').value = smtp.host || '';
     if (document.getElementById('smtp-port')) document.getElementById('smtp-port').value = smtp.port || 465;
     if (document.getElementById('smtp-user')) document.getElementById('smtp-user').value = smtp.user || '';
     if (document.getElementById('smtp-from')) document.getElementById('smtp-from').value = smtp.from || '';
+    if (document.getElementById('resend-api-key')) document.getElementById('resend-api-key').value = smtp.resendApiKey || '';
+
+    const provider = smtp.provider || (smtp.hasResendApiKey ? 'resend' : 'smtp');
+    const isResend = provider === 'resend';
+    const resendRadio = document.getElementById('provider-resend');
+    const smtpRadio = document.getElementById('provider-smtp');
+    if (resendRadio) resendRadio.checked = isResend;
+    if (smtpRadio) smtpRadio.checked = !isResend;
+    this.toggleEmailProviderUi(isResend);
+  },
+
+  toggleEmailProviderUi(isResend) {
+    const resendBox = document.getElementById('resend-settings-box');
+    const smtpBox = document.getElementById('smtp-traditional-box');
+    const labelResend = document.getElementById('label-provider-resend');
+    const labelSmtp = document.getElementById('label-provider-smtp');
+
+    if (resendBox) resendBox.style.display = isResend ? 'block' : 'none';
+    if (smtpBox) smtpBox.style.display = isResend ? 'none' : 'block';
+
+    if (labelResend) {
+      labelResend.style.border = isResend ? '2px solid #00f2fe' : '1px solid rgba(255, 255, 255, 0.15)';
+      labelResend.style.background = isResend ? 'rgba(0, 242, 254, 0.12)' : 'rgba(255, 255, 255, 0.04)';
+    }
+    if (labelSmtp) {
+      labelSmtp.style.border = !isResend ? '2px solid #00f2fe' : '1px solid rgba(255, 255, 255, 0.15)';
+      labelSmtp.style.background = !isResend ? 'rgba(0, 242, 254, 0.12)' : 'rgba(255, 255, 255, 0.04)';
+    }
   },
 
   async updateQrPreview() {
@@ -598,19 +626,32 @@ const AdminPortal = {
     const form = document.getElementById('smtp-settings-form');
     if (!form) return;
 
+    // Attach provider radio switch listeners
+    document.querySelectorAll('input[name="email-provider"]').forEach((r) => {
+      r.addEventListener('change', (e) => {
+        AdminPortal.toggleEmailProviderUi(e.target.value === 'resend');
+      });
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const passVal = document.getElementById('smtp-pass').value;
+      const isResend = document.getElementById('provider-resend')?.checked;
+      const resendApiKeyVal = document.getElementById('resend-api-key')?.value.trim();
+      const passVal = document.getElementById('smtp-pass')?.value;
 
       const updatedSmtp = {
         enabled: document.getElementById('smtp-enabled').checked,
-        host: document.getElementById('smtp-host').value.trim(),
-        port: parseInt(document.getElementById('smtp-port').value, 10) || 465,
-        user: document.getElementById('smtp-user').value.trim(),
-        from: document.getElementById('smtp-from').value.trim(),
+        provider: isResend ? 'resend' : 'smtp',
+        host: document.getElementById('smtp-host')?.value.trim() || '',
+        port: parseInt(document.getElementById('smtp-port')?.value, 10) || 465,
+        user: document.getElementById('smtp-user')?.value.trim() || '',
+        from: document.getElementById('smtp-from')?.value.trim() || '',
         mockMode: !document.getElementById('smtp-enabled').checked
       };
 
+      if (resendApiKeyVal) {
+        updatedSmtp.resendApiKey = resendApiKeyVal;
+      }
       if (passVal) {
         updatedSmtp.pass = passVal;
       }
@@ -626,12 +667,12 @@ const AdminPortal = {
         });
         const data = await res.json();
         if (data.success) {
-          window.showToast('✓ Konfigurasi SMTP berhasil disimpan!');
+          window.showToast('✓ Konfigurasi Email berhasil disimpan!');
         } else {
           window.showToast('Gagal: ' + data.message);
         }
       } catch (err) {
-        window.showToast('Gagal menyimpan SMTP: ' + err.message);
+        window.showToast('Gagal menyimpan pengaturan email: ' + err.message);
       }
     });
   },
@@ -651,22 +692,29 @@ const AdminPortal = {
         return;
       }
 
+      const isResend = document.getElementById('provider-resend')?.checked;
+      const resendApiKeyVal = document.getElementById('resend-api-key')?.value.trim();
+
       btn.disabled = true;
-      btn.textContent = 'Menghubungi SMTP...';
+      btn.textContent = isResend ? 'Menghubungi Resend API...' : 'Menghubungi SMTP...';
       if (statusBox) {
         statusBox.style.display = 'block';
         statusBox.style.background = 'rgba(0, 242, 254, 0.1)';
         statusBox.style.border = '1px solid #00f2fe';
         statusBox.style.color = '#e2e8f0';
-        statusBox.textContent = `Menghubungkan ke server SMTP dan mengirim email verifikasi ke ${recipient}...`;
+        statusBox.textContent = isResend
+          ? `Menghubungkan ke Resend API (HTTPS Port 443) dan mengirim email verifikasi ke ${recipient}...`
+          : `Menghubungkan ke server SMTP dan mengirim email verifikasi ke ${recipient}...`;
       }
 
       const smtpConfig = {
-        host: document.getElementById('smtp-host').value.trim(),
-        port: parseInt(document.getElementById('smtp-port').value, 10) || 465,
-        user: document.getElementById('smtp-user').value.trim(),
-        pass: document.getElementById('smtp-pass').value,
-        from: document.getElementById('smtp-from').value.trim()
+        provider: isResend ? 'resend' : 'smtp',
+        resendApiKey: resendApiKeyVal,
+        host: document.getElementById('smtp-host')?.value.trim() || '',
+        port: parseInt(document.getElementById('smtp-port')?.value, 10) || 465,
+        user: document.getElementById('smtp-user')?.value.trim() || '',
+        pass: document.getElementById('smtp-pass')?.value,
+        from: document.getElementById('smtp-from')?.value.trim() || ''
       };
 
       try {

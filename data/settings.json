@@ -34,12 +34,14 @@
   },
   "smtp": {
     "enabled": true,
+    "provider": "resend",
+    "resendApiKey": "",
     "host": "smtp.gmail.com",
     "port": 465,
     "secure": false,
     "user": "immanuel.mmbm1@gmail.com",
     "pass": "zpjg mhan ewlz hzgh",
-    "from": "Beyond Ordinary 2026 <no-reply@beyondordinary.tech>",
+    "from": "Beyond Ordinary 2026 <onboarding@resend.dev>",
     "mockMode": false
   },
   "rundown": [

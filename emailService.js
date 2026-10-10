@@ -1,7 +1,96 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
 const QRCode = require('qrcode');
+
+// Helper to make HTTPS requests without external dependencies
+function postJson(urlStr, headers, bodyData) {
+  if (typeof fetch !== 'undefined') {
+    return fetch(urlStr, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(bodyData)
+    }).then(async (res) => {
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.message || `Resend API Error (HTTP ${res.status}): ${JSON.stringify(data)}`);
+      }
+      return data;
+    });
+  }
+
+  return new Promise((resolve, reject) => {
+    const url = new URL(urlStr);
+    const dataString = JSON.stringify(bodyData);
+    const options = {
+      hostname: url.hostname,
+      port: 443,
+      path: url.pathname + (url.search || ''),
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(dataString)
+      }
+    };
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', (chunk) => (body += chunk));
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(body);
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(json);
+          } else {
+            reject(new Error(json.message || `Resend API Error (HTTP ${res.statusCode}): ${body}`));
+          }
+        } catch {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(body);
+          } else {
+            reject(new Error(`Resend API Error (HTTP ${res.statusCode}): ${body}`));
+          }
+        }
+      });
+    });
+    req.on('error', reject);
+    req.write(dataString);
+    req.end();
+  });
+}
+
+// Resend Email Dispatcher (Runs over HTTPS Port 443 - 100% Works on Railway)
+async function sendResendEmail(apiKey, { from, to, subject, html, attachments }) {
+  if (!apiKey) {
+    throw new Error('Resend API Key tidak ditemukan. Pastikan sudah diisi di Admin atau Environment Variables.');
+  }
+
+  const payload = {
+    from: from || 'Beyond Ordinary <onboarding@resend.dev>',
+    to: Array.isArray(to) ? to : [to],
+    subject,
+    html
+  };
+
+  if (attachments && attachments.length > 0) {
+    payload.attachments = attachments.map((att) => ({
+      filename: att.filename,
+      content: Buffer.isBuffer(att.content)
+        ? att.content.toString('base64')
+        : Buffer.from(att.content).toString('base64')
+    }));
+  }
+
+  return postJson(
+    'https://api.resend.com/emails',
+    {
+      Authorization: `Bearer ${apiKey.trim()}`,
+      'Content-Type': 'application/json'
+    },
+    payload
+  );
+}
 
 const EMAIL_LOGS_PATH = path.join(__dirname, 'data', 'email_logs.json');
 
@@ -368,7 +457,44 @@ async function sendConfirmationEmail(settings, lead) {
     zoomUrl: event.zoom.meetingUrl
   };
 
-  // Check if real SMTP is configured and enabled
+  // 1. Check if Resend API is configured and preferred (100% works on Railway via HTTPS 443)
+  const resendApiKey = (smtp.resendApiKey || process.env.RESEND_API_KEY || '').trim();
+  const isResendMode = smtp.provider === 'resend' || (!smtp.host && resendApiKey) || (smtp.enabled && resendApiKey && smtp.provider !== 'smtp');
+
+  if (smtp.enabled && isResendMode && resendApiKey) {
+    try {
+      const fromAddress = smtp.from && smtp.from.trim()
+        ? smtp.from.trim()
+        : `"${event.title}" <onboarding@resend.dev>`;
+
+      const resendResult = await sendResendEmail(resendApiKey, {
+        from: fromAddress,
+        to: lead.email,
+        subject: subject,
+        html: htmlContent,
+        attachments: [
+          {
+            filename: 'Event_Schedule.ics',
+            content: icsContent
+          }
+        ]
+      });
+
+      emailRecord.mode = 'resend-api';
+      emailRecord.messageId = resendResult.id;
+      emailRecord.status = 'sent';
+      logEmailDispatch(emailRecord);
+      return { success: true, mode: 'resend-api', record: emailRecord, id: resendResult.id };
+    } catch (err) {
+      console.warn('Resend API send failed, falling back to logged dispatch:', err.message);
+      emailRecord.mode = 'resend-fallback';
+      emailRecord.error = err.message;
+      logEmailDispatch(emailRecord);
+      return { success: false, mode: 'resend-fallback', error: err.message, record: emailRecord };
+    }
+  }
+
+  // 2. Check if real SMTP is configured and enabled
   if (smtp.enabled && smtp.host && smtp.user) {
     try {
       const portNum = parseInt(smtp.port, 10) || 587;
@@ -422,8 +548,60 @@ async function sendConfirmationEmail(settings, lead) {
   return { success: true, mode: 'mock', record: emailRecord };
 }
 
-// Function to test SMTP connection and send a test email
+// Function to test SMTP or Resend connection and send a test email
 async function testSmtpConnection(smtpConfig, testToEmail) {
+  const resendApiKey = (smtpConfig.resendApiKey || process.env.RESEND_API_KEY || '').trim();
+  const isResendMode = smtpConfig.provider === 'resend' || (!smtpConfig.host && resendApiKey);
+
+  // --- BRANCH A: RESEND API (HTTPS PORT 443) ---
+  if (isResendMode || (resendApiKey && smtpConfig.provider !== 'smtp')) {
+    if (!resendApiKey) {
+      throw new Error('Resend API Key wajib diisi. Masukkan API Key di form pengaturan atau di Railway Variables (RESEND_API_KEY).');
+    }
+
+    const fromAddress = smtpConfig.from && smtpConfig.from.trim()
+      ? smtpConfig.from.trim()
+      : '"Beyond Ordinary Test" <onboarding@resend.dev>';
+
+    const targetEmail = testToEmail && testToEmail.trim()
+      ? testToEmail.trim()
+      : 'delivered@resend.dev';
+
+    const testHtml = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #050a1a; color: #fff; padding: 30px; border-radius: 12px; border: 1px solid #00f2fe; max-width: 580px; margin: 0 auto;">
+        <div style="display: inline-block; background: rgba(0, 242, 254, 0.15); color: #00f2fe; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: bold; letter-spacing: 1px; margin-bottom: 12px;">
+          VERIFIKASI RESEND API BERHASIL (PORT 443 HTTPS)
+        </div>
+        <h2 style="color: #ffffff; margin: 0 0 10px;">🎉 Resend API Terhubung Normal di Railway!</h2>
+        <p style="color: #94a3b8; font-size: 14px; line-height: 1.6;">
+          Selamat! Server email via <strong>Resend API</strong> berhasil mengirim email verifikasi ini.
+        </p>
+        <div style="background: rgba(0, 242, 254, 0.08); border-left: 3px solid #00f2fe; padding: 12px 16px; margin: 20px 0; font-size: 13px;">
+          Pengiriman menggunakan koneksi HTTPS (Port 443), sehingga <strong>100% aman dan tidak terblokir oleh firewall Railway</strong>.
+        </div>
+        <hr style="border: 0; border-top: 1px solid #1e293b; margin: 20px 0;">
+        <small style="color: #64748b;">Waktu Verifikasi: ${new Date().toLocaleString('id-ID')}</small>
+      </div>
+    `;
+
+    try {
+      const resendRes = await sendResendEmail(resendApiKey, {
+        from: fromAddress,
+        to: targetEmail,
+        subject: '✅ [Tes Berhasil via Resend API] Verifikasi Pengiriman Email Beyond Ordinary di Railway',
+        html: testHtml
+      });
+      return { success: true, mode: 'resend', messageId: resendRes.id };
+    } catch (err) {
+      const msg = err.message || '';
+      if (msg.includes('only send testing emails to your own email address')) {
+        throw new Error('Resend membatasi uji coba hanya ke email akun Resend Anda sendiri (karena belum menambahkan domain kustom). Masukkan email yang Anda gunakan saat mendaftar akun Resend, atau verifikasi domain di resend.com/domains.');
+      }
+      throw new Error(`Gagal mengirim via Resend: ${msg}`);
+    }
+  }
+
+  // --- BRANCH B: TRADITIONAL SMTP ---
   if (!smtpConfig.host || !smtpConfig.user) {
     throw new Error('Host dan Username SMTP wajib diisi.');
   }
@@ -485,8 +663,8 @@ async function testSmtpConnection(smtpConfig, testToEmail) {
     if (rawMsg.includes('535') || rawMsg.includes('Username and Password not accepted') || rawMsg.includes('BadCredentials')) {
       throw new Error('Google / Server email menolak login (Kode 535): Pastikan Verifikasi 2 Langkah sudah aktif di akun Google Anda, dan gunakan 16 karakter App Password dari myaccount.google.com/apppasswords (bukan password login biasa akun Google).');
     }
-    if (rawMsg.includes('ETIMEDOUT') || rawMsg.includes('ECONNREFUSED')) {
-      throw new Error(`Koneksi ke host ${smtpConfig.host}:${portNum} gagal atau timeout. Pastikan koneksi internet aktif dan nomor port benar (465 untuk SSL atau 587 untuk TLS).`);
+    if (rawMsg.includes('ETIMEDOUT') || rawMsg.includes('ECONNREFUSED') || rawMsg.includes('Connection timeout')) {
+      throw new Error(`Koneksi ke host ${smtpConfig.host}:${portNum} gagal atau timeout. Jika Anda menggunakan Railway, port SMTP diblokir di paket gratis/Hobby. Disarankan beralih ke Resend API (HTTPS Port 443) yang tidak terblokir.`);
     }
     if (rawMsg.includes('ENOTFOUND')) {
       throw new Error(`Host server "${smtpConfig.host}" tidak ditemukan. Periksa kembali penulisan nama host.`);
