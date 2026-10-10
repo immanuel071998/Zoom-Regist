@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Ordinary — Class of 2026 | Virtual Summit & Masterclass</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f2fe'><circle cx='12' cy='12' r='10'/></svg>">
+</head>
+<body>
+
+  <!-- Dynamic Futuristic Background Layer (Clean & Minimalist Behind the Scenes) -->
+  <div id="custom-bg-layer" style="background-image: url('/assets/backgrounds/cyber-stage.svg');"></div>
+  <div id="custom-bg-overlay" style="background-color: rgba(4, 8, 20, 0.65);"></div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Clean Minimalist Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">BEYOND <span class="text-gradient-cyan">ORDINARY</span></div>
+          <div class="brand-sub">Class of 2026 • Live Masterclass</div>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#overview" class="nav-link">Overview</a></li>
+        <li><a href="#registration" class="nav-link">Registrasi</a></li>
+        <li><a href="#rundown" class="nav-link">Jadwal Kelas</a></li>
+        <li><a href="#journey" class="nav-link">Audience Journey</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="btn-portal-admin" class="btn btn-outline-cyan" type="button">
+          ⚙️ Portal Admin
+        </button>
+        <a href="#registration" class="btn btn-primary">
+          Daftar Sekarang
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Registration Section (Two Column Grid) -->
+  <main class="hero-section" id="overview">
+    <div class="container hero-grid">
+      
+      <!-- Left Column: Event Showcase & Value Proposition -->
+      <div class="hero-info">
+        <div class="badge-pill">
+          ⚡ VIRTUAL SUMMIT & LIVE WORKSHOP • CLASS OF 2026
+        </div>
+
+        <h1 class="hero-title">
+          WELCOME TO<br>
+          <span class="text-gradient-cyan">Beyond Ordinary</span><br>
+          <span style="font-size: 32px; font-weight: 600; color: #cbd5e1;">Class of 2026</span>
+        </h1>
+
+        <p class="hero-desc">
+          <strong>Innovation. Performance. Real Impact. Built for what's next.</strong><br>
+          Bergabunglah dalam masterclass interaktif khusus untuk arsitek, visual artist, AI engineer, dan studio profesional. Uji batas performa render real-time dan rasakan pengalaman workflow tanpa bottleneck.
+        </p>
+
+        <!-- Meta info cards -->
+        <div class="hero-meta-grid">
+          <div class="meta-item">
+            <div class="meta-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="meta-label">Tanggal Acara</div>
+              <div class="meta-value" id="hero-event-date">Sabtu, 24 Oktober 2026</div>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <div class="meta-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div class="meta-label">Waktu Siaran</div>
+              <div class="meta-value" id="hero-event-time">13:00 - 16:00 WIB</div>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <div class="meta-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <div>
+              <div class="meta-label">Platform Akses</div>
+              <div class="meta-value">Zoom Meeting (Live HD)</div>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <div class="meta-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="meta-label">Tracks Spesialisasi</div>
+              <div class="meta-value">4 Masterclass Intensif</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlight perks -->
+        <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: #94a3b8;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="color: #00f2fe;">✓</span> Akses instan link & barcode Zoom resmi langsung setelah registrasi
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="color: #00f2fe;">✓</span> Pengiriman otomatis link Zoom & kalender (.ics) ke Email Perusahaan
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="color: #00f2fe;">✓</span> Kesempatan submit project sample untuk di-render live saat siaran
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Interactive Registration Wizard Card -->
+      <div class="glass-card reg-card" id="registration">
+        
+        <!-- Step Progress Bar -->
+        <div class="reg-steps-header">
+          <div class="step-line"><div class="step-line-fill"></div></div>
+
+          <div class="reg-step-node active" data-step="1">
+            <div class="step-circle">1</div>
+            <div class="step-label">Data Peserta</div>
+          </div>
+
+          <div class="reg-step-node" data-step="2">
+            <div class="step-circle">2</div>
+            <div class="step-label">Upload Sample</div>
+          </div>
+
+          <div class="reg-step-node" data-step="3">
+            <div class="step-circle">3</div>
+            <div class="step-label">Akses Zoom</div>
+          </div>
+        </div>
+
+        <form id="registration-form" onsubmit="return false;">
+          
+          <!-- ================= STEP 1: INPUT DATA ================= -->
+          <div id="step-1-container">
+            <div style="margin-bottom: 20px;">
+              <h3 style="font-size: 19px; font-weight: 700; color: #ffffff;">Input Data Peserta</h3>
+              <p style="font-size: 12.5px; color: #94a3b8;">Lengkapi data profesional Anda untuk mendapatkan link Zoom dan tiket acara.</p>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="reg-name">Full Name <span class="req">*</span></label>
+                <input type="text" id="reg-name" class="form-input" placeholder="e.g. Budi Santoso" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-job-title">Job Title <span class="req">*</span></label>
+                <input type="text" id="reg-job-title" class="form-input" placeholder="e.g. Senior BIM Architect" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="reg-company">Company Name <span class="req">*</span></label>
+                <input type="text" id="reg-company" class="form-input" placeholder="e.g. ArchiTech Studio" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-industry">Industry Sector</label>
+                <select id="reg-industry" class="form-select">
+                  <option value="Architecture / BIM">Architecture / BIM</option>
+                  <option value="VFX & Animation">VFX & Animation</option>
+                  <option value="Game Development / 3D">Game Development / 3D</option>
+                  <option value="Artificial Intelligence">Artificial Intelligence / Data</option>
+                  <option value="Manufacturing & CAD">Manufacturing & CAD</option>
+                  <option value="Media & Broadcast">Media & Broadcast</option>
+                  <option value="Enterprise IT">Enterprise IT</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="reg-city">City / Region <span class="req">*</span></label>
+                <input type="text" id="reg-city" class="form-input" placeholder="e.g. Jakarta / Bandung / Surabaya" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reg-email">Corporate Email Address <span class="req">*</span></label>
+                <input type="email" id="reg-email" class="form-input" placeholder="nama@perusahaan.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="reg-whatsapp">WhatsApp Number (Untuk Notifikasi & Link Siaran Langsung)</label>
+              <input type="tel" id="reg-whatsapp" class="form-input" placeholder="+62 812-xxxx-xxxx">
+            </div>
+
+            <!-- Hardware Bottlenecks Checkboxes -->
+            <div class="form-group" style="margin-top: 14px;">
+              <label class="form-label">Tantangan / Hardware Bottleneck Utama Anda Saat Ini:</label>
+              <div class="bottleneck-grid">
+                <label class="checkbox-card">
+                  <input type="checkbox" name="bottleneck" value="Render lambat">
+                  <span>Render lambat / antri panjang</span>
+                </label>
+                <label class="checkbox-card">
+                  <input type="checkbox" name="bottleneck" value="Biaya cloud tinggi">
+                  <span>Biaya cloud compute tinggi</span>
+                </label>
+                <label class="checkbox-card">
+                  <input type="checkbox" name="bottleneck" value="Remote work lag">
+                  <span>Remote work / display lag</span>
+                </label>
+                <label class="checkbox-card">
+                  <input type="checkbox" name="bottleneck" value="PC crash">
+                  <span>PC crash saat scene berat</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+              <button type="button" id="btn-to-step-2" class="btn btn-primary btn-lg" style="width: 100%;">
+                Lanjut ke Upload Sample File (Opsional) →
+              </button>
+            </div>
+          </div>
+
+          <!-- ================= STEP 2: UPLOAD DATA (OPSIONAL) ================= -->
+          <div id="step-2-container" style="display: none;">
+            <div style="margin-bottom: 20px;">
+              <h3 style="font-size: 19px; font-weight: 700; color: #ffffff;">Submit Heavy Sample File (Optional)</h3>
+              <p style="font-size: 12.5px; color: #94a3b8;">
+                Unggah sample file proyek 3D, scene VFX, model BIM, atau pipeline Unreal Engine Anda. 2-3 file terbaik akan dipilih untuk di-render live saat masterclass berlangsung!
+              </p>
+            </div>
+
+            <div class="dropzone" id="sample-dropzone">
+              <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <div class="dropzone-title">Drag & drop file proyek Anda ke sini</div>
+              <div class="dropzone-sub">atau klik untuk memilih file dari komputer (.zip, .blend, .max, .rvt, .mov, hingga 250MB)</div>
+            </div>
+
+            <input type="file" id="sample-file-input" style="display: none;" accept=".zip,.rar,.7z,.blend,.obj,.fbx,.dwg,.rvt,.mov,.mp4">
+
+            <!-- Selected File Preview -->
+            <div id="sample-file-preview" class="file-preview-card" style="display: none;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00f2fe" stroke-width="2">
+                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                  <polyline points="13 2 13 9 20 9"></polyline>
+                </svg>
+                <div>
+                  <div id="sample-file-name" style="font-size: 13.5px; font-weight: 700; color: #ffffff;">file_name.zip</div>
+                  <div id="sample-file-size" style="font-size: 11.5px; color: #94a3b8;">25.4 MB</div>
+                </div>
+              </div>
+              <button type="button" id="btn-remove-sample" class="btn btn-secondary btn-sm" style="color: #f43f5e;">
+                Batal / Ganti
+              </button>
+            </div>
+
+            <!-- Privacy Guarantee notice -->
+            <div style="margin-top: 16px; padding: 12px 14px; background: rgba(0, 242, 254, 0.05); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: var(--radius-sm); font-size: 12px; color: #94a3b8; display: flex; gap: 10px; align-items: start;">
+              <span style="color: #00f2fe; font-size: 15px;">🛡️</span>
+              <span>Assets submitted will strictly be used for live rendering tests during the broadcast and permanently deleted post-event. Keamanan hak cipta aset Anda terjamin.</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px; margin-top: 24px;">
+              <button type="button" id="btn-back-to-step-1" class="btn btn-secondary btn-lg">
+                ← Kembali
+              </button>
+              <button type="button" id="btn-submit-registration" class="btn btn-primary btn-lg">
+                Konfirmasi & Dapatkan Link Zoom 🚀
+              </button>
+            </div>
+          </div>
+
+          <!-- ================= STEP 3: SUCCESS & ZOOM ACCESS ================= -->
+          <div id="step-3-container" style="display: none;">
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+              <div style="display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; color: #10b981; margin-bottom: 12px;">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3 style="font-size: 20px; font-weight: 800; color: #ffffff;">Registrasi Berhasil Terkonfirmasi!</h3>
+              <p style="font-size: 13px; color: #94a3b8;">
+                Halo <strong id="conf-attendee-name" style="color: #00f2fe;">Nama Peserta</strong> (<span id="conf-attendee-company">Perusahaan</span>). Undangan resmi Anda telah aktif.
+              </p>
+            </div>
+
+            <!-- Prominent Zoom Meeting Access Card -->
+            <div class="zoom-pass-card">
+              <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #38bdf8; font-weight: 700;">
+                Akses Siaran Langsung Zoom Meeting
+              </div>
+
+              <!-- Zoom Link Box -->
+              <div class="zoom-url-display">
+                <span id="zoom-url-text">https://zoom.us/j/84920389102...</span>
+                <button type="button" id="btn-copy-zoom" class="btn btn-secondary btn-sm" style="margin-left: auto; white-space: nowrap;">
+                  📋 Salin
+                </button>
+              </div>
+
+              <div class="creds-pill-grid">
+                <div class="creds-pill">
+                  <div style="color: #64748b; font-size: 11px;">Meeting ID</div>
+                  <div id="zoom-meeting-id" style="font-weight: 700; color: #ffffff; font-family: monospace;">849 2038 9102</div>
+                </div>
+                <div class="creds-pill">
+                  <div style="color: #64748b; font-size: 11px;">Passcode</div>
+                  <div id="zoom-passcode" style="font-weight: 700; color: #ffffff; font-family: monospace;">BEYOND2026</div>
+                </div>
+              </div>
+
+              <!-- Barcode / QR Code Zoom Meeting Preview -->
+              <div style="background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(0, 242, 254, 0.25); border-radius: 12px; padding: 14px; margin: 12px 0 16px; text-align: center;">
+                <div style="font-size: 11px; color: #38bdf8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+                  📱 Barcode / QR Code Zoom Meeting Resmi:
+                </div>
+                <img id="conf-qr-image" src="" alt="Zoom Meeting QR Code" style="width: 140px; height: 140px; border-radius: 8px; border: 1px solid rgba(0, 242, 254, 0.4); display: inline-block; background: #070e24;">
+                <div style="font-size: 11px; color: #94a3b8; margin-top: 6px;">
+                  Buka kamera HP Anda dan scan barcode untuk langsung bergabung ke Zoom
+                </div>
+              </div>
+
+              <a id="btn-join-zoom" href="#" target="_blank" class="btn btn-primary btn-lg" style="width: 100%;">
+                🎥 Buka & Masuk Zoom Meeting
+              </a>
+            </div>
+
+            <!-- Email Notification Status Banner -->
+            <div style="padding: 12px 14px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-sm); margin-bottom: 16px; font-size: 12.5px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                  <span style="color: #10b981;">✓ Undangan & Kalender Dikirim ke:</span>
+                  <div id="conf-attendee-email" style="font-weight: 600; color: #ffffff;">email@company.com</div>
+                </div>
+                <button type="button" id="btn-preview-email" class="btn btn-outline-cyan btn-sm">
+                  👁️ Lihat Email
+                </button>
+              </div>
+            </div>
+
+            <!-- Invitation Saving & Calendar Actions -->
+            <div style="margin-bottom: 8px; font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">
+              Simpan Undangan & Jadwal:
+            </div>
+
+            <div class="action-buttons-grid">
+              <button type="button" id="btn-download-ics" class="btn btn-secondary">
+                📅 Unduh Kalender (.ics)
+              </button>
+              <button type="button" id="btn-google-cal" class="btn btn-secondary">
+                🌐 Google Calendar
+              </button>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <button type="button" id="btn-download-pass" class="btn btn-outline-cyan" style="width: 100%;">
+                🎫 Download Kartu Digital VIP Pass (PNG)
+              </button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; font-size: 11.5px; color: #64748b;">
+              <span>Registration ID: <strong id="conf-attendee-id" style="color: #e2e8f0;">REG-2026-0000</strong></span>
+              <button type="button" id="btn-resend-email" class="btn btn-secondary btn-sm" style="font-size: 11px;">
+                Kirim Ulang Email
+              </button>
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Section 2: 4-Class Rundown & Curriculum (Matching Image 2) -->
+  <section class="container" id="rundown" style="padding: 70px 0;">
+    <div class="section-title-wrap">
+      <div class="badge-pill purple" style="margin-bottom: 12px;">CURRICULUM & TIMETABLE</div>
+      <h2 style="font-size: 34px; font-weight: 800; color: #ffffff;">Final Access & Class Rundown</h2>
+      <p style="font-size: 15px; color: #94a3b8; margin-top: 8px;">
+        4 sesi kelas komprehensif yang dibimbing oleh pakar industri terdepan, lengkap dengan live benchmark rendering.
+      </p>
+    </div>
+
+    <div class="rundown-grid" id="rundown-list-container">
+      <!-- Dynamic Rundown rendered via app.js -->
+    </div>
+  </section>
+
+  <!-- Section 3: Audience Nurturing & Journey Timeline (Matching Image 2) -->
+  <section class="container" id="journey" style="padding: 40px 0 80px;">
+    <div class="section-title-wrap">
+      <div class="badge-pill" style="margin-bottom: 12px;">ATTENDEE LIFECYCLE</div>
+      <h2 style="font-size: 32px; font-weight: 800; color: #ffffff;">Automated Audience Journey</h2>
+      <p style="font-size: 14.5px; color: #94a3b8; margin-top: 8px;">
+        Alur pendampingan peserta otomatis dari registrasi hingga sesi live broadcast.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      
+      <div class="glass-card" style="padding: 26px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="font-size: 20px;">✉️</span>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff;">D-7: Email Curriculum</h4>
+        </div>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.5;">
+          Membagikan kurikulum kelas lengkap, profil detail pembicara, dan panduan teknis persiapan sistem workstation Anda.
+        </p>
+      </div>
+
+      <div class="glass-card" style="padding: 26px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="font-size: 20px;">💬</span>
+          <h4 style="font-size: 16px; font-weight: 700; color: #ffffff;">D-3: WhatsApp Reminder</h4>
+        </div>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.5;">
+          Pengingat via pesan WhatsApp resmi dengan link interaktif untuk mengajukan pertanyaan teknis khusus sebelum siaran.
+        </p>
+      </div>
+
+      <div class="glass-card" style="padding: 26px; border-color: rgba(0, 242, 254, 0.4);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="font-size: 20px;">🚀</span>
+          <h4 style="font-size: 16px; font-weight: 700; color: #00f2fe;">D-Day: Final Broadcast Push</h4>
+        </div>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.5;">
+          Pengiriman direct streaming link 1 jam dan 15 menit sebelum siaran dimulai, memastikan semua peserta langsung terhubung ke Zoom.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MODAL: EMAIL SENT PREVIEW (MATCHING IMAGE 1 MAC MAIL MOCKUP) ================= -->
+  <div id="email-preview-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 760px; padding: 20px;">
+      <!-- Mac-style Window Titlebar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f56; cursor: pointer;" id="close-email-modal-btn"></div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #ffbd2e;"></div>
+          <div style="width: 12px; height: 12px; border-radius: 50%; background: #27c93f;"></div>
+          <span style="font-size: 12.5px; font-weight: 600; color: #cbd5e1; margin-left: 10px;">
+            Mail — Your Registration is Confirmed! (Beyond Ordinary 2026)
+          </span>
+        </div>
+        <button onclick="document.getElementById('email-preview-modal').classList.remove('open')" class="btn btn-secondary btn-sm">Tutup</button>
+      </div>
+
+      <!-- Mail Iframe Frame -->
+      <div style="height: 520px; background: #ffffff; border-radius: 8px; overflow: hidden;">
+        <iframe id="email-preview-iframe" style="width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: ADMIN ACCESS (NO PASSWORD TEXT / HINTS) ================= -->
+  <div id="index-admin-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 400px; text-align: center; padding: 32px 26px;">
+      <div style="display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: rgba(0, 242, 254, 0.12); border: 2px solid #00f2fe; color: #00f2fe; margin-bottom: 16px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+
+      <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 6px;">Portal Admin</h3>
+      <p style="font-size: 13px; color: #94a3b8; margin-bottom: 20px;">
+        Masukkan password untuk mengakses portal:
+      </p>
+
+      <form id="index-admin-form" onsubmit="return false;">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <input type="password" id="index-admin-pwd" class="form-input" placeholder="" autocomplete="off" style="text-align: center; font-size: 18px; letter-spacing: 3px;">
+          <div id="index-admin-error" style="color: #f43f5e; font-size: 12px; margin-top: 6px; display: none;">
+            Password salah!
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <button type="button" id="btn-cancel-index-admin" class="btn btn-secondary">
+            Batal
+          </button>
+          <button type="submit" id="btn-submit-index-admin" class="btn btn-primary">
+            Masuk
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/calendar.js"></script>
+  <script src="/js/app.js"></script>
+
+</body>
+</html>

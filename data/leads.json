@@ -1,0 +1,155 @@
+[
+  {
+    "id": "REG-2026-6721",
+    "name": "soegiarto sssssalim santoso",
+    "company": "media seven",
+    "jobTitle": "freelance",
+    "city": "Kota Surabaya",
+    "email": "immanuel.mmbm14@gmail.com",
+    "whatsapp": "082144081333",
+    "industry": "Architecture / BIM",
+    "bottlenecks": [
+      "Render lambat",
+      "Biaya cloud tinggi"
+    ],
+    "status": "Confirmed",
+    "hasAsset": false,
+    "assetFilename": null,
+    "assetOriginalName": null,
+    "assetSize": null,
+    "registeredAt": "2026-10-10T12:25:45.680Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T12:25:45.680Z"
+  },
+  {
+    "id": "REG-2026-3237",
+    "name": "soegiarto salim santoso",
+    "company": "seven media",
+    "jobTitle": "freelance",
+    "city": "Kota Surabaya",
+    "email": "immanuel.mmbm14@gmail.com",
+    "whatsapp": "082144081333",
+    "industry": "Game Development / 3D",
+    "bottlenecks": [
+      "Biaya cloud tinggi",
+      "PC crash"
+    ],
+    "status": "Confirmed",
+    "hasAsset": false,
+    "assetFilename": null,
+    "assetOriginalName": null,
+    "assetSize": null,
+    "registeredAt": "2026-10-10T12:21:59.485Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T12:21:59.485Z"
+  },
+  {
+    "id": "REG-2026-8198",
+    "name": "soegiarto salim santoso",
+    "company": "seven media",
+    "jobTitle": "freelance",
+    "city": "Kota Surabaya",
+    "email": "immanuel.mmbm1@gmail.com",
+    "whatsapp": "082144081333",
+    "industry": "Game Development / 3D",
+    "bottlenecks": [
+      "Render lambat",
+      "Remote work lag"
+    ],
+    "status": "Confirmed",
+    "hasAsset": false,
+    "assetFilename": null,
+    "assetOriginalName": null,
+    "assetSize": null,
+    "registeredAt": "2026-10-10T11:46:05.231Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T11:46:05.231Z"
+  },
+  {
+    "id": "REG-2026-0814",
+    "name": "Budi Santoso",
+    "company": "ArchiTech Studio Jakarta",
+    "jobTitle": "Lead BIM Architect",
+    "city": "Jakarta",
+    "email": "budi.santoso@architech.co.id",
+    "whatsapp": "+62 811-9876-5432",
+    "industry": "Architecture / BIM",
+    "bottlenecks": [
+      "Render lambat",
+      "PC crash"
+    ],
+    "status": "VIP",
+    "hasAsset": true,
+    "assetFilename": "project_01_bim.zip",
+    "assetOriginalName": "Hospital_Megastructure_Revit.zip",
+    "assetSize": "48.2 MB",
+    "registeredAt": "2026-10-10T14:22:10.000Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T14:22:15.000Z"
+  },
+  {
+    "id": "REG-2026-0815",
+    "name": "Jessica Amanda",
+    "company": "PixelVibe Studios",
+    "jobTitle": "Senior VFX Artist",
+    "city": "Bandung",
+    "email": "jessica@pixelvibe.art",
+    "whatsapp": "+62 812-4455-6677",
+    "industry": "VFX & Animation",
+    "bottlenecks": [
+      "Render lambat",
+      "Remote work lag"
+    ],
+    "status": "Confirmed",
+    "hasAsset": true,
+    "assetFilename": "scene_vfx.mov",
+    "assetOriginalName": "explosion_smoke_simulation.mov",
+    "assetSize": "92.4 MB",
+    "registeredAt": "2026-10-10T15:10:04.000Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T15:10:09.000Z"
+  },
+  {
+    "id": "REG-2026-0816",
+    "name": "Aditya Pratama",
+    "company": "Nusa Game Interactive",
+    "jobTitle": "Unreal Engine Technical Director",
+    "city": "Surabaya",
+    "email": "aditya.p@nusagames.id",
+    "whatsapp": "+62 813-7788-9900",
+    "industry": "Game Development / 3D",
+    "bottlenecks": [
+      "Biaya cloud tinggi",
+      "PC crash"
+    ],
+    "status": "Registered",
+    "hasAsset": true,
+    "assetFilename": "unreal_project.zip",
+    "assetOriginalName": "CyberCity_Nanite_Lumen_Test.zip",
+    "assetSize": "115.0 MB",
+    "registeredAt": "2026-10-10T16:05:30.000Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T16:05:35.000Z"
+  },
+  {
+    "id": "REG-2026-0817",
+    "name": "Maya Widjaja",
+    "company": "Synapse AI Labs",
+    "jobTitle": "Head of Machine Learning",
+    "city": "Yogyakarta",
+    "email": "maya@synapselabs.ai",
+    "whatsapp": "+62 817-2233-4455",
+    "industry": "Artificial Intelligence",
+    "bottlenecks": [
+      "Biaya cloud tinggi"
+    ],
+    "status": "Confirmed",
+    "hasAsset": false,
+    "assetFilename": null,
+    "assetOriginalName": null,
+    "assetSize": null,
+    "registeredAt": "2026-10-10T16:45:12.000Z",
+    "emailSent": true,
+    "emailSentAt": "2026-10-10T16:45:16.000Z"
+  }
+]

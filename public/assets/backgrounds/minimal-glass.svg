@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="meshGrad1" cx="20%" cy="30%" r="55%">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.8" />
+      <stop offset="60%" stop-color="#090d16" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#030712" stop-opacity="1" />
+    </radialGradient>
+    <radialGradient id="meshGrad2" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#0e3f7e" stop-opacity="0.6" />
+      <stop offset="70%" stop-color="#030712" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="meshGrad3" cx="50%" cy="50%" r="35%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#030712" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Dark base -->
+  <rect width="1920" height="1080" fill="#030712" />
+  <rect width="1920" height="1080" fill="url(#meshGrad1)" />
+  <rect width="1920" height="1080" fill="url(#meshGrad2)" />
+  <rect width="1920" height="1080" fill="url(#meshGrad3)" />
+
+  <!-- Subtle Geometric Curves & Glass Rings -->
+  <g opacity="0.12" fill="none" stroke="#60a5fa" stroke-width="1.5">
+    <circle cx="960" cy="540" r="320" />
+    <circle cx="960" cy="540" r="480" stroke-dasharray="8 8" />
+    <circle cx="960" cy="540" r="640" />
+    <circle cx="960" cy="540" r="820" stroke-dasharray="12 12" />
+    <circle cx="960" cy="540" r="1020" />
+  </g>
+
+  <!-- Micro Grid Pattern -->
+  <g opacity="0.06" stroke="#ffffff" stroke-width="0.8">
+    <line x1="0" y1="270" x2="1920" y2="270" />
+    <line x1="0" y1="540" x2="1920" y2="540" />
+    <line x1="0" y1="810" x2="1920" y2="810" />
+    <line x1="480" y1="0" x2="480" y2="1080" />
+    <line x1="960" y1="0" x2="960" y2="1080" />
+    <line x1="1440" y1="0" x2="1440" y2="1080" />
+  </g>
+</svg>

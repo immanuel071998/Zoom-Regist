@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#02040a" />
+      <stop offset="50%" stop-color="#080e24" />
+      <stop offset="85%" stop-color="#1e1035" />
+      <stop offset="100%" stop-color="#090514" />
+    </linearGradient>
+
+    <radialGradient id="cityMist" cx="50%" cy="85%" r="60%">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.35" />
+      <stop offset="40%" stop-color="#06b6d4" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <filter id="cBloom">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#skyGrad)" />
+  <rect width="1920" height="1080" fill="url(#cityMist)" />
+
+  <!-- Distant Background Skyscrapers -->
+  <g fill="#0b1329" opacity="0.6">
+    <rect x="50" y="380" width="80" height="700" />
+    <rect x="150" y="310" width="110" height="770" />
+    <rect x="290" y="420" width="70" height="660" />
+    <rect x="380" y="260" width="130" height="820" />
+    <rect x="530" y="340" width="90" height="740" />
+    <rect x="640" y="210" width="150" height="870" />
+    <rect x="810" y="300" width="100" height="780" />
+    <rect x="930" y="180" width="180" height="900" />
+    <rect x="1130" y="280" width="120" height="800" />
+    <rect x="1270" y="220" width="140" height="860" />
+    <rect x="1430" y="350" width="90" height="730" />
+    <rect x="1540" y="270" width="130" height="810" />
+    <rect x="1690" y="390" width="80" height="690" />
+    <rect x="1790" y="320" width="110" height="760" />
+  </g>
+
+  <!-- Midground Megastructures with Neon Windows & Accents -->
+  <g fill="#070b16">
+    <!-- Building 1 -->
+    <rect x="200" y="460" width="140" height="620" />
+    <line x1="200" y1="460" x2="340" y2="460" stroke="#00f2fe" stroke-width="2" filter="url(#cBloom)" />
+    <!-- Building 2 -->
+    <rect x="420" y="390" width="170" height="690" />
+    <line x1="420" y1="390" x2="590" y2="390" stroke="#ec4899" stroke-width="2" filter="url(#cBloom)" />
+    <!-- Building 3 Center Tower -->
+    <rect x="850" y="320" width="220" height="760" />
+    <polygon points="960,250 850,320 1070,320" fill="#04060d" />
+    <line x1="960" y1="180" x2="960" y2="250" stroke="#00f2fe" stroke-width="3" filter="url(#cBloom)" />
+    <circle cx="960" cy="180" r="4" fill="#ec4899" filter="url(#cBloom)" />
+    <!-- Building 4 -->
+    <rect x="1200" y="370" width="180" height="710" />
+    <line x1="1200" y1="370" x2="1380" y2="370" stroke="#a855f7" stroke-width="2" filter="url(#cBloom)" />
+    <!-- Building 5 -->
+    <rect x="1500" y="440" width="160" height="640" />
+    <line x1="1500" y1="440" x2="1660" y2="440" stroke="#00f2fe" stroke-width="2" filter="url(#cBloom)" />
+  </g>
+
+  <!-- Window Dot Grids / Cyber Lights -->
+  <g fill="#38bdf8" opacity="0.35">
+    <circle cx="460" cy="450" r="2" /> <circle cx="500" cy="450" r="2" /> <circle cx="540" cy="450" r="2" />
+    <circle cx="460" cy="490" r="2" /> <circle cx="500" cy="490" r="2" /> <circle cx="540" cy="490" r="2" />
+    <circle cx="460" cy="530" r="2" /> <circle cx="500" cy="530" r="2" /> <circle cx="540" cy="530" r="2" />
+    <circle cx="890" cy="400" r="2.5" fill="#ec4899" /> <circle cx="960" cy="400" r="2.5" fill="#00f2fe" /> <circle cx="1030" cy="400" r="2.5" fill="#ec4899" />
+    <circle cx="890" cy="450" r="2.5" fill="#00f2fe" /> <circle cx="960" cy="450" r="2.5" fill="#ec4899" /> <circle cx="1030" cy="450" r="2.5" fill="#00f2fe" />
+    <circle cx="890" cy="500" r="2.5" /> <circle cx="960" cy="500" r="2.5" /> <circle cx="1030" cy="500" r="2.5" />
+    <circle cx="1250" cy="430" r="2" /> <circle cx="1290" cy="430" r="2" /> <circle cx="1330" cy="430" r="2" />
+    <circle cx="1250" cy="470" r="2" /> <circle cx="1290" cy="470" r="2" /> <circle cx="1330" cy="470" r="2" />
+  </g>
+
+  <!-- Cyber Highway Light Trails in Foreground -->
+  <path d="M 0,920 Q 960,860 1920,920" fill="none" stroke="#00f2fe" stroke-width="4" opacity="0.8" filter="url(#cBloom)" />
+  <path d="M 0,960 Q 960,890 1920,960" fill="none" stroke="#ec4899" stroke-width="3" opacity="0.7" filter="url(#cBloom)" />
+  <path d="M 0,1010 Q 960,930 1920,1010" fill="none" stroke="#3b82f6" stroke-width="5" opacity="0.5" filter="url(#cBloom)" />
+</svg>

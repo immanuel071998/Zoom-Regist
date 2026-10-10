@@ -1,0 +1,71 @@
+{
+  "event": {
+    "title": "Beyond Ordinary — Class of 2026",
+    "subtitle": "Innovation. Performance. Real Impact. Built for what's next.",
+    "description": "Virtual Summit & Masterclass intensif untuk arsitek, visual artist, AI engineer, dan studio kreatif. Akses langsung live rendering, workflow mutakhir, dan insight industri.",
+    "date": "2026-10-24",
+    "displayDate": "Sabtu, 24 Oktober 2026",
+    "displayTime": "13:00 - 16:00 WIB",
+    "startTime": "13:00",
+    "endTime": "16:00",
+    "timezone": "Asia/Jakarta",
+    "location": "Zoom Meeting Live Broadcast (Virtual)",
+    "zoom": {
+      "meetingUrl": "https://zoom.us/j/84920389102?pwd=BeyondOrdinary2026",
+      "meetingId": "849 2038 9102",
+      "passcode": "BEYOND2026",
+      "qrMode": "custom",
+      "customQrUrl": "/uploads/qrcodes/zoom_qr_1791635102646.png"
+    },
+    "organizer": {
+      "name": "Beyond Ordinary Event Team",
+      "email": "events@beyondordinary.tech",
+      "supportWa": "+62 812-3456-7890"
+    }
+  },
+  "background": {
+    "type": "preset",
+    "activeId": "quantum-grid",
+    "url": "/assets/backgrounds/quantum-grid.svg",
+    "overlayOpacity": 0.6,
+    "blur": 0,
+    "animated": false,
+    "updatedAt": "2026-10-10T11:48:28.315Z"
+  },
+  "smtp": {
+    "enabled": true,
+    "host": "smtp.gmail.com",
+    "port": 465,
+    "secure": false,
+    "user": "immanuel.mmbm1@gmail.com",
+    "pass": "zpjg mhan ewlz hzgh",
+    "from": "Beyond Ordinary 2026 <no-reply@beyondordinary.tech>",
+    "mockMode": false
+  },
+  "rundown": [
+    {
+      "time": "13:00 - 13:45",
+      "title": "Class 1: BIM & Computational Architecture",
+      "speaker": "Ar. Raymond Tan, BIM Specialist",
+      "desc": "Optimasi pemodelan parametrik skala besar dan akselerasi render real-time tanpa bottleneck."
+    },
+    {
+      "time": "13:45 - 14:30",
+      "title": "Class 2: VFX, Dynamic FX & CGI Pipeline",
+      "speaker": "Dian Sastrawan, Lead VFX Supervisor",
+      "desc": "Simulasi partikel kompleks, pyro, dan fluid rendering dengan workstation ultra-high performance."
+    },
+    {
+      "time": "14:30 - 15:15",
+      "title": "Class 3: Enterprise AI & Neural Rendering",
+      "speaker": "Dr. Sarah Chen, AI Research Director",
+      "desc": "Implementasi local LLM, generative vision, dan inference workflow cepat di environment studio."
+    },
+    {
+      "time": "15:15 - 16:00",
+      "title": "Class 4: Unreal Engine 5 & Real-Time Virtual Production",
+      "speaker": "Kevin Pratama, Technical Director",
+      "desc": "Nanite & Lumen real-time stress test pada scene sample peserta terpilih secara langsung."
+    }
+  ]
+}

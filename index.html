@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrasi Zoom Real-time</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #f7f9fc;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+    h2 {
+      margin-top: 0;
+      color: #1a73e8;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background-color: #1a73e8;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #1557b0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      background: #f1f5f9;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .badge {
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FORM PENDAFTARAN -->
+  <div class="card">
+    <h2>Form Pendaftaran Zoom</h2>
+    <form id="registForm">
+      <label>Nama Lengkap:</label>
+      <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+
+      <label>Email:</label>
+      <input type="email" id="email" placeholder="Contoh: budi@gmail.com" required>
+
+      <button type="submit">Daftar Sekarang</button>
+    </form>
+  </div>
+
+  <!-- DAFTAR PESERTA REAL-TIME -->
+  <div class="card">
+    <h2>Daftar Peserta (Live Real-time)</h2>
+    <p style="font-size: 13px; color: #555;">Daftar di bawah ini akan terupdate seketika di semua perangkat saat ada yang mendaftar:</p>
+    <ul id="pesertaList">
+      <li>Memuat data...</li>
+    </ul>
+  </div>
+
+  <!-- KONEKSI FIREBASE (SDK v10 via CDN) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // ============================================================
+    // GANTI BAGIAN DI BAWAH INI DENGAN CONFIG DARI FIREBASE CONSOLE ANDA:
+    // ============================================================
+    const firebaseConfig = {
+      apiKey: "GANTI_DENGAN_API_KEY_ANDA",
+      authDomain: "GANTI_DENGAN_AUTH_DOMAIN_ANDA",
+      projectId: "GANTI_DENGAN_PROJECT_ID_ANDA",
+      storageBucket: "GANTI_DENGAN_STORAGE_BUCKET_ANDA",
+      messagingSenderId: "GANTI_DENGAN_MESSAGING_SENDER_ID_ANDA",
+      appId: "GANTI_DENGAN_APP_ID_ANDA"
+    };
+
+    // 1. Inisialisasi Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const pesertaRef = collection(db, "peserta_zoom");
+
+    // 2. Fungsi Simpan Data Baru saat Form di-Submit
+    const form = document.getElementById("registForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nama = document.getElementById("nama").value;
+      const email = document.getElementById("email").value;
+
+      try {
+        await addDoc(pesertaRef, {
+          nama: nama,
+          email: email,
+          waktuDaftar: serverTimestamp()
+        });
+        form.reset();
+        alert("Pendaftaran berhasil tersimpan di Cloud Database!");
+      } catch (err) {
+        console.error("Gagal menyimpan:", err);
+        alert("Terjadi kesalahan: " + err.message);
+      }
+    });
+
+    // 3. FITUR KUNCI REAL-TIME: onSnapshot mendengarkan perubahan seketika!
+    const q = query(pesertaRef, orderBy("waktuDaftar", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const listElement = document.getElementById("pesertaList");
+      listElement.innerHTML = "";
+
+      if (snapshot.empty) {
+        listElement.innerHTML = "<li>Belum ada peserta yang mendaftar.</li>";
+        return;
+      }
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${data.nama}</strong> <span class="badge">${data.email}</span>`;
+        listElement.appendChild(li);
+      });
+    }, (error) => {
+      console.error("Error real-time:", error);
+      document.getElementById("pesertaList").innerHTML = `<li style="color:red;">Error: Masukkan konfigurasi Firebase yang valid terlebih dahulu.</li>`;
+    });
+  </script>
+</body>
+</html>

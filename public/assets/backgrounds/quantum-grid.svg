@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="qSpace" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="40%" stop-color="#050b18" />
+      <stop offset="80%" stop-color="#020617" />
+      <stop offset="100%" stop-color="#000000" />
+    </radialGradient>
+    <linearGradient id="horizonGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="30%" stop-color="#6366f1" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="40%" stop-color="#818cf8" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.1" />
+    </linearGradient>
+    <filter id="qGlow">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#qSpace)" />
+
+  <!-- Horizon Light Burst -->
+  <ellipse cx="960" cy="540" rx="900" ry="140" fill="url(#horizonGlow)" opacity="0.45" />
+  <line x1="0" y1="540" x2="1920" y2="540" stroke="#38bdf8" stroke-width="2" opacity="0.7" filter="url(#qGlow)" />
+
+  <!-- Perspective 3D Grid Floor (Bottom half) -->
+  <g opacity="0.35" stroke="#38bdf8" stroke-width="1.2">
+    <!-- Horizon to bottom radiating lines -->
+    <line x1="960" y1="540" x2="-200" y2="1080" />
+    <line x1="960" y1="540" x2="0" y2="1080" />
+    <line x1="960" y1="540" x2="200" y2="1080" />
+    <line x1="960" y1="540" x2="400" y2="1080" />
+    <line x1="960" y1="540" x2="600" y2="1080" />
+    <line x1="960" y1="540" x2="750" y2="1080" />
+    <line x1="960" y1="540" x2="870" y2="1080" />
+    <line x1="960" y1="540" x2="960" y2="1080" stroke="#60a5fa" stroke-width="2" />
+    <line x1="960" y1="540" x2="1050" y2="1080" />
+    <line x1="960" y1="540" x2="1170" y2="1080" />
+    <line x1="960" y1="540" x2="1320" y2="1080" />
+    <line x1="960" y1="540" x2="1520" y2="1080" />
+    <line x1="960" y1="540" x2="1720" y2="1080" />
+    <line x1="960" y1="540" x2="1920" y2="1080" />
+    <line x1="960" y1="540" x2="2120" y2="1080" />
+
+    <!-- Exponential horizontal depth lines -->
+    <line x1="0" y1="545" x2="1920" y2="545" opacity="0.1" />
+    <line x1="0" y1="552" x2="1920" y2="552" opacity="0.15" />
+    <line x1="0" y1="562" x2="1920" y2="562" opacity="0.2" />
+    <line x1="0" y1="576" x2="1920" y2="576" opacity="0.3" />
+    <line x1="0" y1="595" x2="1920" y2="595" opacity="0.4" />
+    <line x1="0" y1="620" x2="1920" y2="620" opacity="0.5" />
+    <line x1="0" y1="655" x2="1920" y2="655" opacity="0.6" />
+    <line x1="0" y1="705" x2="1920" y2="705" opacity="0.7" />
+    <line x1="0" y1="775" x2="1920" y2="775" opacity="0.8" />
+    <line x1="0" y1="875" x2="1920" y2="875" opacity="0.9" />
+    <line x1="0" y1="1020" x2="1920" y2="1020" opacity="1.0" />
+  </g>
+
+  <!-- Cybernetic Hexagons / Floating Nodes in Upper Sky -->
+  <g opacity="0.25" stroke="#60a5fa" stroke-width="1.5" fill="none">
+    <polygon points="400,200 450,170 500,200 500,260 450,290 400,260" />
+    <polygon points="450,290 500,260 550,290 550,350 500,380 450,350" />
+    <polygon points="1400,180 1450,150 1500,180 1500,240 1450,270 1400,240" />
+    <polygon points="1450,270 1500,240 1550,270 1550,330 1500,360 1450,330" />
+  </g>
+
+  <!-- Quantum Data Spheres -->
+  <circle cx="960" cy="540" r="14" fill="#38bdf8" opacity="0.8" filter="url(#qGlow)" />
+  <circle cx="820" cy="540" r="8" fill="#818cf8" opacity="0.7" />
+  <circle cx="1100" cy="540" r="8" fill="#818cf8" opacity="0.7" />
+  <circle cx="650" cy="540" r="6" fill="#38bdf8" opacity="0.6" />
+  <circle cx="1270" cy="540" r="6" fill="#38bdf8" opacity="0.6" />
+</svg>
